@@ -1,0 +1,14 @@
+version: '3.8'
+services:
+  db:
+    image: mysql:5.7
+    environment:
+      - MYSQL_ROOT_PASSWORD=somerootpass
+      - MYSQL_PASSWORD=somepass
+      - MYSQL_DATABASE=dockerizeme_db
+      - MYSQL_USER=someuser
+  php:
+    build: .
+    ports:
+      - 80:80
+
