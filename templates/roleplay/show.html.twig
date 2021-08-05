@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Roleplay{% endblock %}
+
+{% block body %}
+    <h1>Roleplay</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ roleplay.id }}</td>
+            </tr>
+            <tr>
+                <th>Title_role</th>
+                <td>{{ roleplay.titleRole }}</td>
+            </tr>
+            <tr>
+                <th>Firstname_role</th>
+                <td>{{ roleplay.firstnameRole }}</td>
+            </tr>
+            <tr>
+                <th>Lastname_role</th>
+                <td>{{ roleplay.lastnameRole }}</td>
+            </tr>
+            <tr>
+                <th>Range_age</th>
+                <td>{{ roleplay.rangeAge }}</td>
+            </tr>
+            <tr>
+                <th>Description_role</th>
+                <td>{{ roleplay.descriptionRole }}</td>
+            </tr>
+            <tr>
+                <th>Gender_role</th>
+                <td>{{ roleplay.genderRole }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('roleplay_index') }}">back to list</a>
+
+    <a href="{{ path('roleplay_edit', {'id': roleplay.id}) }}">edit</a>
+
+    {{ include('roleplay/_delete_form.html.twig') }}
+{% endblock %}

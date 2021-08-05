@@ -5,10 +5,16 @@ namespace App\Controller;
 use App\Entity\Activity;
 use App\Form\ActivityType;
 use App\Repository\ActivityRepository;
+use Doctrine\DBAL\Types\TextType;
+use phpDocumentor\Reflection\Types\This;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Throwable;
+
+use function PHPUnit\Framework\throwException;
 
 /**
  * @Route("/activity")
@@ -20,8 +26,10 @@ class ActivityController extends AbstractController
      */
     public function index(ActivityRepository $activityRepository): Response
     {
+        $activity = $this->getDoctrine()->getRepository(Activity::class);
+        $activity = $activity->findAll();
         return $this->render('activity/index.html.twig', [
-            'activities' => $activityRepository->findAll(),
+            'activities' => $activity,
         ]);
     }
 
@@ -44,7 +52,7 @@ class ActivityController extends AbstractController
 
         return $this->renderForm('activity/new.html.twig', [
             'activity' => $activity,
-            'form' => $form,
+            'form' => $form
         ]);
     }
 
@@ -53,8 +61,13 @@ class ActivityController extends AbstractController
      */
     public function show(Activity $activity): Response
     {
+        $act = $this->getDoctrine()->getRepository(Activity::class);
+        $act = $act->find($activity);
+        if (!$activity) {
+            throw $this->createNotFoundException('Aucune activity pour l\'id: ' . $activity);;
+        }
         return $this->render('activity/show.html.twig', [
-            'activity' => $activity,
+            'activity' => $act,
         ]);
     }
 
@@ -83,11 +96,17 @@ class ActivityController extends AbstractController
      */
     public function delete(Request $request, Activity $activity): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$activity->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($activity);
-            $entityManager->flush();
+        $entityManager = $this->getDoctrine()->getManager();
+        $act = $this->getDoctrine()->getRepository(Activity::class);
+        $act = $act->find($activity);
+
+        if (!$activity) {
+            throw $this->createNotFoundException('there are no activity with the following id:' . $activity);
         }
+
+        $entityManager->remove($act);
+        $entityManager->flush();
+
 
         return $this->redirectToRoute('activity_index', [], Response::HTTP_SEE_OTHER);
     }

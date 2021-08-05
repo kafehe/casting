@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Roleplay index{% endblock %}
+
+{% block body %}
+    <h1>Roleplay index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title_role</th>
+                <th>Firstname_role</th>
+                <th>Lastname_role</th>
+                <th>Range_age</th>
+                <th>Description_role</th>
+                <th>Gender_role</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for roleplay in roleplays %}
+            <tr>
+                <td>{{ roleplay.id }}</td>
+                <td>{{ roleplay.titleRole }}</td>
+                <td>{{ roleplay.firstnameRole }}</td>
+                <td>{{ roleplay.lastnameRole }}</td>
+                <td>{{ roleplay.rangeAge }}</td>
+                <td>{{ roleplay.descriptionRole }}</td>
+                <td>{{ roleplay.genderRole }}</td>
+                <td>
+                    <a href="{{ path('roleplay_show', {'id': roleplay.id}) }}">show</a>
+                    <a href="{{ path('roleplay_edit', {'id': roleplay.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('roleplay_new') }}">Create new</a>
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Roleplay{% endblock %}
+
+{% block body %}
+    <h1>Create new Roleplay</h1>
+
+    {{ include('roleplay/_form.html.twig') }}
+
+    <a href="{{ path('roleplay_index') }}">back to list</a>
+{% endblock %}
