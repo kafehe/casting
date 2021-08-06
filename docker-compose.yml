@@ -3,12 +3,16 @@ services:
   db:
     image: mysql:5.7
     environment:
-      - MYSQL_ROOT_PASSWORD=somerootpass
-      - MYSQL_PASSWORD=somepass
-      - MYSQL_DATABASE=dockerizeme_db
-      - MYSQL_USER=someuser
+      - MYSQL_ROOT_PASSWORD=casting
+      - MYSQL_DATABASE=casting
+
   php:
     build: .
     ports:
       - 80:80
 
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
