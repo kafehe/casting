@@ -4,9 +4,12 @@ namespace App\Entity;
 
 use App\Repository\FileRepository;
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=FileRepository::class)
+ * @ApiResource()
  */
 class File
 {
@@ -28,9 +31,9 @@ class File
     private $type;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $link;
+    private $filename;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="images")
@@ -41,6 +44,16 @@ class File
      * @ORM\ManyToOne(targetEntity=Casting::class, inversedBy="images")
      */
     private $casting;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Document::class, inversedBy="files")
+     */
+    private $document;
+
+    public function __toString()
+    {
+        return $this->getName();
+    }
 
     public function getId(): ?int
     {
@@ -71,14 +84,14 @@ class File
         return $this;
     }
 
-    public function getLink(): ?string
+    public function getFilename(): ?string
     {
-        return $this->link;
+        return $this->filename;
     }
 
-    public function setLink(string $link): self
+    public function setFilename(string $filename): self
     {
-        $this->link = $link;
+        $this->filename = $filename;
 
         return $this;
     }
@@ -103,6 +116,18 @@ class File
     public function setCasting(?Casting $casting): self
     {
         $this->casting = $casting;
+
+        return $this;
+    }
+
+    public function getDocument(): ?Document
+    {
+        return $this->document;
+    }
+
+    public function setDocument(?Document $document): self
+    {
+        $this->document = $document;
 
         return $this;
     }

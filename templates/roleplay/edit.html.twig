@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Roleplay{% endblock %}
+
+{% block body %}
+    <h1>Edit Roleplay</h1>
+
+    {{ include('roleplay/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('roleplay_index') }}">back to list</a>
+
+    {{ include('roleplay/_delete_form.html.twig') }}
+{% endblock %}

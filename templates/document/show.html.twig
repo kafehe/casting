@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Document{% endblock %}
+
+{% block body %}
+    <h1>Document</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ document.id }}</td>
+            </tr>
+            <tr>
+                <th>Name_doc</th>
+                <td>{{ document.nameDoc }}</td>
+            </tr>
+            <tr>
+                <th>Numero_doc</th>
+                <td>{{ document.numeroDoc }}</td>
+            </tr>
+            <tr>
+                <th>Date_del</th>
+                <td>{{ document.dateDel ? document.dateDel|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Date_exp</th>
+                <td>{{ document.dateExp ? document.dateExp|date('Y-m-d') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('document_index') }}">back to list</a>
+
+    <a href="{{ path('document_edit', {'id': document.id}) }}">edit</a>
+
+    {{ include('document/_delete_form.html.twig') }}
+{% endblock %}

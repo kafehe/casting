@@ -9,6 +9,8 @@
         <thead>
             <tr>
                 <th>Id</th>
+                <th>Name_activity</th>
+                <th>Member</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -16,6 +18,8 @@
         {% for activity in activities %}
             <tr>
                 <td>{{ activity.id }}</td>
+                <td>{{ activity.nameActivity }}</td>
+                <td>{{ activity.member }}</td>
                 <td>
                     <a href="{{ path('activity_show', {'id': activity.id}) }}">show</a>
                     <a href="{{ path('activity_edit', {'id': activity.id}) }}">edit</a>
@@ -23,7 +27,7 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="2">no records found</td>
+                <td colspan="4">no records found</td>
             </tr>
         {% endfor %}
         </tbody>

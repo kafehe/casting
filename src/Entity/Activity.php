@@ -6,9 +6,12 @@ use App\Repository\ActivityRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=ActivityRepository::class)
+ * @ApiResource()
  */
 class Activity
 {
@@ -18,12 +21,20 @@ class Activity
      * @ORM\Column(type="integer")
      */
     private $id;
+    /**
+     * @ORM\Column(type="string",length=100)
+     */
+    private $name_activity;
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $member;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Actor::class, inversedBy="activities")
+     * @ORM\ManyToMany(targetEntity=User::class, mappedBy="activities")
+     * 
      */
-    private $actors;
-
+    private $user;
     /**
      * @ORM\ManyToMany(targetEntity=Roleplay::class, mappedBy="actitvitiesTodo")
      */
@@ -31,37 +42,18 @@ class Activity
 
     public function __construct()
     {
-        $this->actors = new ArrayCollection();
         $this->roleplays = new ArrayCollection();
+        $this->user = new ArrayCollection();
+    }
+
+    public function __toString()
+    {
+        return $this->getNameActivity();
     }
 
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    /**
-     * @return Collection|Actor[]
-     */
-    public function getActors(): Collection
-    {
-        return $this->actors;
-    }
-
-    public function addActor(Actor $actor): self
-    {
-        if (!$this->actors->contains($actor)) {
-            $this->actors[] = $actor;
-        }
-
-        return $this;
-    }
-
-    public function removeActor(Actor $actor): self
-    {
-        $this->actors->removeElement($actor);
-
-        return $this;
     }
 
     /**
@@ -86,6 +78,57 @@ class Activity
     {
         if ($this->roleplays->removeElement($roleplay)) {
             $roleplay->removeActitvitiesTodo($this);
+        }
+
+        return $this;
+    }
+
+    public function getNameActivity(): ?string
+    {
+        return $this->name_activity;
+    }
+
+    public function setNameActivity(string $name_activity): self
+    {
+        $this->name_activity = $name_activity;
+
+        return $this;
+    }
+
+    public function getMember(): ?int
+    {
+        return $this->member;
+    }
+
+    public function setMember(int $member): self
+    {
+        $this->member = $member;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|User[]
+     */
+    public function getUser(): Collection
+    {
+        return $this->user;
+    }
+
+    public function addUser(User $user): self
+    {
+        if (!$this->user->contains($user)) {
+            $this->user[] = $user;
+            $user->addActivity($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUser(User $user): self
+    {
+        if ($this->user->removeElement($user)) {
+            $user->removeActivity($this);
         }
 
         return $this;

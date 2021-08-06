@@ -12,7 +12,8 @@ class ActivityType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('actors')
+            ->add('name_activity')
+            ->add('member')
             ->add('roleplays')
         ;
     }

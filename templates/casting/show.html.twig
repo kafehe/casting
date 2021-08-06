@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Casting
+{% endblock %}
+
+{% block body %}
+	<h1>Casting</h1>
+
+	<table class="table">
+		<tbody>
+
+			<tr>
+				<th>Title</th>
+				<td>{{ casting.title }}</td>
+			</tr>
+			<tr>
+				<th>Description_cast</th>
+				<td>{{ casting.descriptionCast }}</td>
+			</tr>
+			<tr>
+				<th>Object_cast</th>
+				<td>{{ casting.objectCast }}</td>
+			</tr>
+			<tr>
+				<th>Date_cast</th>
+				<td>{{ casting.dateCast ? casting.dateCast|date('Y-m-d') : '' }}</td>
+			</tr>
+			<tr>
+				<th>Type_cast</th>
+				<td>{{ casting.typeCast }}</td>
+			</tr>
+			<tr>
+				<th>Location</th>
+				<td>{{ casting.location }}</td>
+			</tr>
+			<tr>
+				<th>Casting_place</th>
+				<td>{{ casting.castingPlace }}</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<a href="{{ path('casting_index') }}">back to list</a>
+
+	<a href="{{ path('casting_edit', {'id': casting.id}) }}">edit</a>
+
+	{{ include('casting/_delete_form.html.twig') }}
+{% endblock %}
