@@ -3,6 +3,10 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
+        <link
+                rel="stylesheet"
+                href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        />
         {# Run `composer require symfony/webpack-encore-bundle`
            and uncomment the following Encore helpers to start using Symfony UX #}
         {% block stylesheets %}
@@ -14,6 +18,36 @@
         {% endblock %}
     </head>
     <body>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light" style="height: 70px;" >
+            <a class="navbar-brand" href="#">Casting</a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent"></div>
+            <ul class="nav navbar-nav navbar-right">
+                <AmpContent>
+
+
+                    <li><a class="nav-link" href="{{ path('app_logout') }}">Logout</a></li>
+
+
+
+                </AmpContent>
+
+                <NonAmpContent>
+
+                    {% if is_granted('ROLE_USER') %}
+                        <li>
+                            <a class="nav-link" href="{{ path('app_registration') }}">Register</a>
+                        </li>
+                    {% else %}
+                        <li>
+                            <a class="nav-link" href="{{ path('app_login') }}">Login</a>
+                        </li>
+                    {% endif %}
+
+
+                </NonAmpContent>
+
+            </ul>
+        </nav>
         {% block body %}{% endblock %}
     </body>
 </html>

@@ -103,6 +103,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->activities = new ArrayCollection();
     }
 
+    public function __toString()
+    {
+        return $this->getFirstname();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
