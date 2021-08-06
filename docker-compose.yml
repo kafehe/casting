@@ -10,6 +10,8 @@ services:
     build: .
     ports:
       - 80:80
+    volumes:
+      - .:/var/www
 
   adminer:
     image: adminer
