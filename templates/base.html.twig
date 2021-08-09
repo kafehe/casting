@@ -25,7 +25,7 @@
                 <AmpContent>
 
 
-                    <li><a class="nav-link" href="{{ path('app_logout') }}">Logout</a></li>
+                    <li><a class="nav-link" href="{{ path('app_registration') }}">Register</a></li>
 
 
 
@@ -35,7 +35,7 @@
 
                     {% if is_granted('ROLE_USER') %}
                         <li>
-                            <a class="nav-link" href="{{ path('app_registration') }}">Register</a>
+                            <a class="nav-link" href="{{ path('app_logout') }}">Logout</a>
                         </li>
                     {% else %}
                         <li>
