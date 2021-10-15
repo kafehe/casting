@@ -36,6 +36,23 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $this->_em->flush();
     }
 
+    public function  getUser()
+    {
+//        $qb = $this->createQueryBuilder('c')
+//            ->join('roleplay','r','WITH','r.casting_id = c.id')
+//            ->orderBy('c.created_at','Asc')
+//            ->getQuery();
+//
+//        return $qb->getResult();
+
+        $qb = $this->getEntityManager()->createQuery(
+            "SELECT u.id, u.email, u.birth_date, u.firstname, u.lastname, u.adress, u.nationality, u.gender
+                    FROM APP\ENTITY\User u  WHERE u.roles = 'ROLE_ACTOR' ORDER BY u.id Desc"
+        );
+
+        return $qb->getResult();
+    }
+
     // /**
     //  * @return User[] Returns an array of User objects
     //  */

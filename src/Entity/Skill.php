@@ -21,20 +21,30 @@ class Skill
     /**
      * @ORM\Column(type="string", length=100)
      */
-    private $name_skill;
+    private $nameSkill;
     /**
      * @ORM\Column(type="string",)
      */
     private $rating;
-
+    /**
+     * @ORM\ManyToMany(targetEntity=User::class, mappedBy="skillsTodo")
+     */
+    private $user;
     /**
      * @ORM\ManyToMany(targetEntity=Profile::class, mappedBy="skills")
      */
     private $profilesTodo;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Roleplay::class, mappedBy="skills")
+     */
+    private $roleplays;
+
     public function __construct()
     {
         $this->profilesTodo = new ArrayCollection();
+        $this->user = new ArrayCollection();
+        $this->roleplays = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -44,12 +54,12 @@ class Skill
 
     public function getNameSkill(): ?string
     {
-        return $this->name_skill;
+        return $this->nameSkill;
     }
 
     public function setNameSkill(string $name_skill): self
     {
-        $this->name_skill = $name_skill;
+        $this->nameSkill = $name_skill;
 
         return $this;
     }
@@ -88,6 +98,60 @@ class Skill
     {
         if ($this->profilesTodo->removeElement($profilesTodo)) {
             $profilesTodo->removeSkill($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|User[]
+     */
+    public function getUser(): Collection
+    {
+        return $this->user;
+    }
+
+    public function addUser(User $user): self
+    {
+        if (!$this->user->contains($user)) {
+            $this->user[] = $user;
+            $user->addSkillsTodo($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUser(User $user): self
+    {
+        if ($this->user->removeElement($user)) {
+            $user->removeSkillsTodo($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Roleplay[]
+     */
+    public function getRoleplays(): Collection
+    {
+        return $this->roleplays;
+    }
+
+    public function addRoleplays(Roleplay $roleplay): self
+    {
+        if (!$this->roleplays->contains($roleplay)) {
+            $this->roleplays[] = $roleplay;
+            $roleplay->addSkills($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRoleplays(Roleplay $roleplay): self
+    {
+        if ($this->roleplays->removeElement($roleplay)) {
+            $roleplay->removeSkills($this);
         }
 
         return $this;

@@ -24,15 +24,11 @@ class Activity
     /**
      * @ORM\Column(type="string",length=100)
      */
-    private $name_activity;
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $member;
+    private $nameActivity;
 
     /**
      * @ORM\ManyToMany(targetEntity=User::class, mappedBy="activities")
-     * 
+     *
      */
     private $user;
     /**
@@ -40,10 +36,16 @@ class Activity
      */
     private $roleplays;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Casting::class, mappedBy="activities")
+     */
+    private $castings;
+
     public function __construct()
     {
         $this->roleplays = new ArrayCollection();
         $this->user = new ArrayCollection();
+        $this->castings= new ArrayCollection();
     }
 
     public function __toString()
@@ -83,26 +85,41 @@ class Activity
         return $this;
     }
 
-    public function getNameActivity(): ?string
+    /**
+     * @return Collection|Casting[]
+     */
+    public function getCastings(): Collection
     {
-        return $this->name_activity;
+        return $this->castings;
     }
 
-    public function setNameActivity(string $name_activity): self
+    public function addCastings(Casting $casting): self
     {
-        $this->name_activity = $name_activity;
+        if (!$this->castings->contains($casting)) {
+            $this->castings[] = $casting;
+            $casting->addActivities($this);
+        }
 
         return $this;
     }
 
-    public function getMember(): ?int
+    public function removeCastings(Casting $casting): self
     {
-        return $this->member;
+        if ($this->castings->removeElement($casting)) {
+            $casting->removeActivities($this);
+        }
+
+        return $this;
     }
 
-    public function setMember(int $member): self
+    public function getNameActivity(): ?string
     {
-        $this->member = $member;
+        return $this->nameActivity;
+    }
+
+    public function setNameActivity(string $name_activity): self
+    {
+        $this->nameActivity = $name_activity;
 
         return $this;
     }

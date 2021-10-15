@@ -24,11 +24,11 @@ class Document
     /**
      * @ORM\Column(type="string", length=100)
      */
-    private $name_doc;
+    private $nameDoc;
     /**
      * @ORM\Column(type="string", length=100)
      */
-    private $type_doc;
+    private $typeDoc;
     /**
      * @ORM\Column(type="string")
      */
@@ -64,24 +64,24 @@ class Document
 
     public function getNameDoc(): ?string
     {
-        return $this->name_doc;
+        return $this->nameDoc;
     }
 
     public function setNameDoc(string $name_doc): self
     {
-        $this->name_doc = $name_doc;
+        $this->nameDoc = $name_doc;
 
         return $this;
     }
 
     public function getTypeDoc(): ?string
     {
-        return $this->type_doc;
+        return $this->typeDoc;
     }
 
     public function setTypeDoc(string $type_doc): self
     {
-        $this->type_doc = $type_doc;
+        $this->typeDoc = $type_doc;
 
         return $this;
     }

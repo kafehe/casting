@@ -3,8 +3,8 @@
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/spec" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" packagePrefix="App\" />
       <sourceFolder url="file://$MODULE_DIR$/tests" isTestSource="true" packagePrefix="App\Tests\" />
+      <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" packagePrefix="App\" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/polyfill-php80" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/stopwatch" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/http-client" />
@@ -141,6 +141,20 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/runtime" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/framework-bundle" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/security-guard" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/auth0/auth0-php" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/auth0/php-jwt" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/auth0/jwt-auth-bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/psr/http-client" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/psr/http-message" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/psr/simple-cache" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/ralouphie/getallheaders" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/guzzlehttp/guzzle" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/guzzlehttp/promises" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/guzzlehttp/psr7" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/lcobucci/clock" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/lcobucci/jwt" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/namshi/jose" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/lexik/jwt-authentication-bundle" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

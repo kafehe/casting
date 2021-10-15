@@ -12,6 +12,7 @@ security:
       entity:
         class: App\Entity\User
         property: email
+
   firewalls:
     dev:
       pattern: ^/(_(profiler|wdt)|css|images|js)/
@@ -39,6 +40,6 @@ security:
     - { path: ^/admin, roles: ROLE_ADMIN }
     - { path: ^/profile, roles: ROLE_USER }
     - { path: ^/Superadmin, roles: ROLE_SUPER_ADMIN }
-    - { path: ^/profile1, roles: ROLE_ACTOR }
-    - { path: ^/profile2, roles: ROLE_MANAGER }
-    - { path: ^/profile3, roles: ROLE_PRODUCER }
+    - { path: ^/actor, roles: ROLE_ACTOR }
+    - { path: ^/manager, roles: ROLE_MANAGER }
+    - { path: ^/producer, roles: ROLE_PRODUCER }

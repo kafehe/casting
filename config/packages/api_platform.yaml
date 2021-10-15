@@ -1,7 +1,17 @@
 api_platform:
+    formats:
+        json:
+            mime_types: [ 'application/json' ]
+        jsonld:
+            mime_types: [ 'application/ld+json' ]
+        jsonhal:
+            mime_types: [ 'application/hal+json' ]
+        jsonapi:
+            mime_types: [ 'application/vnd.api+json' ]
     mapping:
         paths: ['%kernel.project_dir%/src/Entity']
     patch_formats:
         json: ['application/merge-patch+json']
+        jsonapi:  ['application/vnd.api+json']
     swagger:
         versions: [3]

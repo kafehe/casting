@@ -5,7 +5,6 @@ namespace App\Controller;
 use ApiPlatform\Core\GraphQl\Type\Definition\UploadType;
 use App\Entity\File;
 use App\Form\FilesType;
-use App\Form\FileType;
 use App\Repository\FileRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
