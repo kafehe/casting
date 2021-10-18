@@ -20,7 +20,7 @@ class RegistrationController extends AbstractController
         $this->passwordHasher = $passwordHasher;
     }
     /**
-     * @Route("/registration", name="app_registration")
+     * @Route("/api/registration", name="app_registration")
      */
     public function index(Request $request)
     {
@@ -35,7 +35,10 @@ class RegistrationController extends AbstractController
             $user->setPassword($this->passwordHasher->hashPassword($user, $user->getPassword()));
 
             // Set their role
-            $user->setRoles(['ROLE_USER']);
+            if ($user->getRoles() === null)
+            {
+                $user->setRoles(['ROLE_USER']);
+            }
 
             // Save
             $em = $this->getDoctrine()->getManager();

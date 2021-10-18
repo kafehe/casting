@@ -23,21 +23,7 @@ class CastingRepository extends ServiceEntityRepository
 
 
 
-    public function  getCastingRoleplay ()
-    {
-//        $qb = $this->createQueryBuilder('c')
-//            ->join('roleplay','r','WITH','r.casting_id = c.id')
-//            ->orderBy('c.created_at','Asc')
-//            ->getQuery();
-//
-//        return $qb->getResult();
 
-        $qb = $this->getEntityManager()->createQuery(
-            "SELECT c.title,c.description_cast,c.object_cast,c.date_cast,c.type_cast,c.location,c.casting_place, r.title_role,r.poste,r.range_age,r.description_role,r.gender_role 
-                    FROM APP\ENTITY\Roleplay r JOIN APP\ENTITY\Casting c  WHERE c.id = r.casting ORDER BY c.id Desc "
-        );
-        return $qb->getResult();
-    }
 
     public function  getCastingById (Request $request)
     {

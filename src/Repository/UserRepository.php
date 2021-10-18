@@ -46,7 +46,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
 //        return $qb->getResult();
 
         $qb = $this->getEntityManager()->createQuery(
-            "SELECT u.id, u.email, u.birth_date, u.firstname, u.lastname, u.adress, u.nationality, u.gender
+            "SELECT u.id, u.email, u.birthDate, u.firstname, u.lastname, u.adress, u.nationality, u.gender
                     FROM APP\ENTITY\User u  WHERE u.roles = 'ROLE_ACTOR' ORDER BY u.id Desc"
         );
 
